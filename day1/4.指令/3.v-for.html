@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <script type="text/babel">
+        let data = {
+            // 数据结构
+            teacher: [{
+                name: 'yong',
+                skill:['ps','css']
+            },{
+                name: 'lin',
+                skill:['js']
+            },{
+                name: 'tian',
+                skill:['ts']
+            }],
+            // 渲染结构
+            // 需要把上面的数据转化为下面这个样子
+            items:[
+                <li key="1">1</li>,
+                <li key="2">2</li>,
+                <li key="3">3</li>
+            ],
+            mapTeacher({
+                teacher
+            }){
+                let arr = []
+                for(let i=0;i<teacher.length;i++){
+                    arr.push(
+                        <option value={teacher[i].name} key={i}>{teacher[i].name}</option>
+                    )
+                }
+                return arr
+            }
+        }
+        ReactDOM.render(
+            <div>
+                <ul>{data.items}</ul>
+                <select>
+                    {data.teacher.map((item,index)=>{
+                        return <option value={item.name} key={index}>{item.name}</option>
+                    })}
+                </select>
+                <select>
+                    {(({
+                        teacher
+                    })=>{
+                        let arr = []
+                        for(let i=0;i<teacher.length;i++){
+                            arr.push(
+                                <option value={teacher[i].name} key={i}>{teacher[i].name}</option>
+                            )
+                        }
+                        return arr
+                    })(data)}
+                </select>
+                <select>
+                    {data.mapTeacher(data)}
+                </select>
+            </div>,
+            document.querySelector('#demo')
+        )
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script>
+        const h = React.createElement;
+        const name = 'yao'
+        // 生成一个描述DOM的对象
+        const jsx = h(
+            "div", {
+                name: "abc"
+            },
+            name,
+            h("p", null, "abc")
+        )
+        console.log(jsx)
+        // 把虚拟DOM对象转为真实DOM
+        ReactDOM.render(
+            jsx,
+            document.querySelector('#demo')
+        )
+    </script>
+</body>
+
+</html>

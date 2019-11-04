@@ -1,0 +1,6 @@
+<template>
+    <div name="abc">
+        {name}
+        <p>abc</p>
+    </div>
+</template>

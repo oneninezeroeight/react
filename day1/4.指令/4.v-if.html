@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- v-if v-else v-else-if -->
+    <div id="demo"></div>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <script type="text/babel">
+        let data = {
+            bool: !0,
+            num: 2
+        }
+        const Vif = ({num,data})=>{
+            console.log(data)
+            switch (num) {
+                case 1:
+                    return '数字为1'
+                case 2:
+                    return '数字为2'
+                default:
+                    return '数字为其他'
+            }
+        }
+        ReactDOM.render(
+            <div>
+                <div>{
+                    data.bool?'真':'假' 
+                }</div>
+                <div>{
+                    data.bool?<p>真的</p>:<p>假的</p> 
+                }</div>
+                <div>{
+                    (({bool})=>{
+                        if(bool){
+                            return '真的'
+                        }else{
+                            return '假的'
+                        }
+                    })(data)
+                }</div>
+                <div>{
+                    Vif(data)
+                }</div>
+                <Vif data={data}></Vif>
+            </div>,
+            document.querySelector('#demo')
+        )
+    </script>
+</body>
+
+</html>
