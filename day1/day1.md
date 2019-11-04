@@ -48,3 +48,11 @@ transform-react-jsx 插件是帮我们把`const jsx = <div>hello world</div>`转
 npm install babel-loader@8.0.0-beta.0 @babel/core @babel/preset-env webpack // 首先安装好 babel 环境
 npm install --save-dev babel-plugin-transform-react-jsx //再安装 transform-react-jsx 插件
 ```
+
+vue双向数据绑定，react单向数据绑定
+
+- v-model v-on: 如果vue没有这两个指令，其实vue也是单向绑定
+
+```html
+<input v-model="xxx" />
+```

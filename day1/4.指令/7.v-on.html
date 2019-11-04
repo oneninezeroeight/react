@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <script type="text/babel">
+        // M
+        let data = {
+            name: 'hello world'
+        }
+        let methods = {
+            test(e){
+                // 阻止事件冒泡
+                e.preventDefault();
+                console.log(e.target)
+            },
+            getInputValue(e){
+                console.log(e.target.value)
+            }
+        }
+        // V
+        ReactDOM.render(
+            <div>
+                {/*相当于v-on或者@指令*/}
+                <button onClick={methods.test}>点击事件</button>
+                <button onClick={()=>{
+                    console.log(2)
+                }}>点击事件</button>
+                {/*相当于v-model*/}
+                <input onChange={methods.getInputValue} />
+            </div>,
+            document.querySelector('#demo')
+        )
+    </script>
+</body>
+
+</html>

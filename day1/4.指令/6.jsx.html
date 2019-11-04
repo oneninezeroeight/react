@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <!-- babel.js jsx -> js -->
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <script type="text/babel">
+    // 由于jsx的class和es6的class重名了，所以jsx中class都改为className
+    // <label> for改为htmlFor
+        let data = {
+            name: 'hello world',
+            style: {
+                color:'red',
+                fontSize: '30px'
+            },
+            arr:['a','b','c']
+        }
+        let methods = {
+            renderName({name}){
+                return name
+            }
+        }
+        ReactDOM.render(
+            <div>
+                {/*支持直接渲染*/}
+                <p>{data.name}</p>
+                {/*支持函数*/}
+                <p>{(({name})=>{
+                    return name
+                })(data)}</p>
+                <p>{methods.renderName(data)}</p>
+                {/*三元表达式*/}
+                <p>{data.name.length>3?"真的":"家的"}</p>
+                {/*二元表达式*/}
+                <p>{data.name.length+1}</p>
+                {/*一元表达式*/}
+                <p>{-data.name.length}</p>
+                {/*支持拓展属性*/}
+                <p name="abc" name1={data.name} name2={methods.renderName(data)}>属性</p>
+                <p style={data.style}>属性</p>
+                <p style={{
+                    color:'red',
+                    fontSize: '30px'
+                }}>属性</p>
+                <p className={data.name.length>3?"abc":"cba"}>属性</p>
+                <ul>{data.arr}</ul>
+                <ul>{data.arr.map((item,index)=>{
+                    return <li key={index}>{item}</li>
+                })}</ul>
+                <label htmlFor />
+            </div>,
+            document.querySelector('#demo')
+        )
+    </script>
+</body>
+
+</html>
