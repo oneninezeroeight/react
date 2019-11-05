@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            height: 50px;
+            width: 100%;
+            line-height: 50px;
+            text-align: center;
+            color: white;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <script type="text/babel">
+        // React.Component是所有组件的父组件，所以某些时候我们可以更改React.Component模板去改变的所有基于它衍生的组件
+        // 首字母是必须大写
+        // react是没有插槽，react父传子都用props
+        class Component1 extends React.Component {
+            // created beforeCreated
+            constructor(props){
+                // beforeCreated
+                // 继承父组件的数据和方法到子组件的this上面
+                // 放在最前面
+                super(props);
+
+                // 组件私有数据 数据不需要变化，你用this.xxxx.xxx
+                this.data = {
+                    name: 'jing '
+                }
+                // 数据需要变化的化 用state去存数据
+                // this.setState可以帮你组件内部更改数据
+                this.state={}
+                // 可以省略 父传子
+                // this.props = props
+                console.log(props)
+                console.log(this)
+                // created
+            }
+            // V
+            render(){
+                return (
+                    <header style={{
+                        backgroundColor: this.props.color
+                    }}>{this.props.name} {this.data.name}</header>
+                )
+            }
+        }
+        
+        ReactDOM.render(
+            <div>
+                <Component1 name='支付宝' color='blue' />
+                <Component1 name='微信' color='green' />
+            </div>,
+            document.querySelector('#demo')
+        )
+    </script>
+</body>
+
+</html>

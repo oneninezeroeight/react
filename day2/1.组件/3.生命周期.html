@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            height: 50px;
+            width: 100%;
+            line-height: 50px;
+            text-align: center;
+            color: white;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <script type="text/babel">
+        class Component1 extends React.Component {
+            constructor(props){
+                
+            }
+            
+            render(){
+                return (
+                    <header style={{
+                        backgroundColor: this.props.color
+                    }}>{this.props.name}</header>
+                )
+            }
+        }
+        
+        ReactDOM.render(
+            <div>
+                <Component1 name='支付宝' color='blue' />
+                <Component1 name='微信' color='green' />
+            </div>,
+            document.querySelector('#demo')
+        )
+    </script>
+</body>
+
+</html>
