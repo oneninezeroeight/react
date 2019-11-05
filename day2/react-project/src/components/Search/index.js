@@ -1,32 +1,66 @@
 import React from "react";
 
 class Search extends React.Component {
-  constructor(props){
+  // 编译前后 created beforeCreated
+  constructor(props) {
     super(props)
-    this.state={
+    this.state = {
       searchText: '',
       isFocus: false
-    } 
+    }
+    console.log('---------constructor-----------')
   }
-  toggle(){
+  // 挂载前后 mounted beforeMounted
+  // 已经被删掉
+  componentWillMount() {
+    console.log('---------componentWillMount-----------')
+  }
+  componentDidMount() {
+    console.log('---------componentDidMount-----------')
+  }
+  // 更新前后 updated beforeUpdated
+  componentWillUpdate() {
+    console.log('---------componentWillUpdate-----------')
+  }
+  // render
+  componentDidUpdate() {
+    console.log('---------componentDidUpdate-----------')
+  }
+  // 销毁前 beforeDestory
+  componentWillUnmount() {
+    console.log('---------componentWillUnmount-----------')
+  }
+
+  toggle() {
     this.setState({
       isFocus: !this.state.isFocus
     })
   }
-  getInputValue(e){
+  getInputValue(e) {
     this.setState({
       searchText: e.target.value
     })
   }
-  clear(){
+  clear() {
     this.setState({
       searchText: ''
     })
   }
+  // Vue是无法断开V层和M层的关系
+  shouldComponentUpdate() {
+    if (this.state.searchText.length >= 8) {
+      // 停止更新
+      return false
+    } else {
+      // 允许更新
+      return true
+    }
+  }
   render() {
+    console.log('---------render-----------')
     return (
       <div className={
-        this.state.isFocus?'weui-search-bar weui-search-bar_focusing':'weui-search-bar'
+        this.state.isFocus ? 'weui-search-bar weui-search-bar_focusing' : 'weui-search-bar'
       } id="searchBar">
         <form className="weui-search-bar__form">
           <div className="weui-search-bar__box">
