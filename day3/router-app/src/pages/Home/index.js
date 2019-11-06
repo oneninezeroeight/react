@@ -8,6 +8,3 @@ export default withRouter(()=>{
         <div>{title}</div>
     )
 })
-
-{/* <Home/>
-{Home()} */}

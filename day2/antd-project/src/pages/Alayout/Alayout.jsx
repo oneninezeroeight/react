@@ -3,7 +3,7 @@ import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import Aheader from '../../components/Aheader/Aheader'
 import Atable from '../../components/Atable/Atable'
 const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 export default class Alayout extends React.Component {
   render() {

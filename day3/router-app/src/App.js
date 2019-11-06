@@ -41,7 +41,7 @@ function App() {
   let routes = [{
     url:'/about',
     // <About />
-    component: About()
+    component: About
   },{
     url:'/users',
     component: <Users />
