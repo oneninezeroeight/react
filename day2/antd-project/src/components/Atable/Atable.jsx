@@ -10,7 +10,7 @@ export default class Alayout extends React.Component {
           title: 'Name',
           dataIndex: 'name',
           key: 'name',
-          render: text => <a>{text}</a>,
+          render: text => <a href="/home">{text}</a>,
         },
         {
           title: 'Age',

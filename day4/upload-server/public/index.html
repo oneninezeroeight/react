@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input onchange="getFile(this)" type="file" />
+    <button>上传</button>
+    <script>
+        const getFile = (el) => {
+            console.log(el.files)
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    console.log(xmlhttp.responseText)
+                }
+            }
+            let data = new FormData()
+            data.append('logo', el.files[0])
+            // data.append(el.files[1])
+            xmlhttp.open('POST', 'http://localhost:3000/upload', 'true')
+            xmlhttp.send(data)
+            // xmlhttp.send(el.files[0])
+        }
+    </script>
+</body>
+
+</html>

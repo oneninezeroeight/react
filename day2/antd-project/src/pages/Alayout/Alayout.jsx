@@ -2,13 +2,25 @@ import React from 'react'
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import Aheader from '../../components/Aheader/Aheader'
 import Atable from '../../components/Atable/Atable'
+import Complaint from '../Complaint/Complaint'
+import Vip from '../Vip/Vip'
+import Aupload from '../Aupload/Aupload'
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from 'react-router-dom'
+
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
 
 export default class Alayout extends React.Component {
   render() {
     return (
-      <div>
+      <Router>
         <Layout>
           <Aheader />
           <Layout>
@@ -24,14 +36,22 @@ export default class Alayout extends React.Component {
                   title={
                     <span>
                       <Icon type="user" />
-                      subnav 1
+                      学院后台
               </span>
                   }
                 >
-                  <Menu.Item key="1">option1</Menu.Item>
-                  <Menu.Item key="2">option2</Menu.Item>
-                  <Menu.Item key="3">option3</Menu.Item>
-                  <Menu.Item key="4">option4</Menu.Item>
+                  <Menu.Item key="1">
+                    <Link to="/complaint">学院评价</Link>
+                  </Menu.Item>
+                  <Menu.Item key="2">
+                    <Link to="/evaluate">技术问题</Link>
+                  </Menu.Item>
+                  <Menu.Item key="3">
+                    <Link to="/vip">VIP</Link>
+                  </Menu.Item>
+                  <Menu.Item key="4">
+                    <Link to="/upload">上传项目</Link>
+                  </Menu.Item>
                 </SubMenu>
                 <SubMenu
                   key="sub2"
@@ -77,12 +97,29 @@ export default class Alayout extends React.Component {
                   minHeight: 280,
                 }}
               >
-                <Atable/>
-        </Content>
+
+                <Switch>
+                  <Route path="/complaint">
+                    {/* <Complaint/> */}
+                    {Complaint()}
+                  </Route>
+                  <Route path="/evaluate">
+                    <Atable />
+                  </Route>
+                  <Route path="/vip">
+                    <Vip />
+                  </Route>
+                  <Route path="/upload">
+                    <Aupload />
+                  </Route>
+                </Switch>
+                <Redirect to="/complaint" />
+
+              </Content>
             </Layout>
           </Layout>
         </Layout>
-      </div>
+      </Router>
     )
   }
 }

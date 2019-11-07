@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script src="redux.js"></script>
+    <script>
+        console.log(window.Redux)
+        // state和action
+        // action查或者改
+        const store = window.Redux.createStore((state = {
+            name: 'author'
+        }, action) => {
+            switch (action.type) {
+                case 'SETAUTHOR':
+                    // 更改建议是返回全新的对象
+                    return {
+                        ...state,
+                        name: action.name
+                    }
+                    break;
+                default:
+                    return state
+                    break;
+            }
+        })
+        // 组件1做监听  vue配合computed
+        store.subscribe(() => console.log(store.getState()))
+
+        // 组件2做触发
+        store.dispatch({
+            type: 'SETAUTHOR',
+            name: 'xie'
+        })
+        store.dispatch({
+            type: 'SETAUTHOR',
+            name: 'yao'
+        })
+        // console.log(store.getState())
+        // console.log(store)
+    </script>
+</body>
+
+</html>

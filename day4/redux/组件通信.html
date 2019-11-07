@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script src="./react.js"></script>
+    <script src="./react-dom.js"></script>
+    <script src="./redux.js"></script>
+    <script>
+        const store = window.Redux.createStore((state = {
+            name: 'yao'
+        }, action) => {
+            switch (action.type) {
+                case 'SETAUTHOR':
+                    // 更改建议是返回全新的对象
+                    return {
+                        ...state,
+                        name: action.name
+                    }
+                    break;
+                default:
+                    return state
+                    break;
+            }
+        })
+        class Component1 extends React.Component {
+            constructor(props) {
+                super(props);
+                console.log(props)
+                this.state = {
+                    name: store.getState().name
+                }
+                store.subscribe(() => {
+                    this.setState({
+                        name: store.getState().name
+                    })
+                    console.log(store.getState())
+                })
+            }
+            render() {
+                return React.createElement('div', {
+                        style: {
+                            border: '1px solid red'
+                        }
+                    },
+                    React.createElement('p', null, this.state.name),
+                    '组件1'
+                )
+            }
+        }
+
+        class Component2 extends React.Component {
+            constructor(props) {
+                super(props);
+                console.log(props)
+                this.state = {
+                    name: ''
+                }
+            }
+            sendData() {
+                store.dispatch({
+                    type: 'SETAUTHOR',
+                    name: this.state.name
+                })
+                console.log('发送数据')
+            }
+            render() {
+                return React.createElement('div', {
+                        style: {
+                            border: '1px solid blue'
+                        }
+                    },
+                    '组件2',
+                    React.createElement('input', {
+                        onChange: (e) => {
+                            this.setState({
+                                name: e.target.value
+                            })
+                        }
+                    }),
+                    React.createElement('button', {
+                        onClick: this.sendData.bind(this)
+                    }, '通信')
+                )
+            }
+        }
+
+        ReactDOM.render(
+            React.createElement('div', null, [
+                React.createElement(Component1, {
+                    key: 0
+                }),
+                React.createElement(Component2, {
+                    key: 1
+                })
+            ]),
+            document.querySelector('#demo')
+        )
+    </script>
+</body>
+
+</html>
