@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            height: 50px;
+            width: 100%;
+            line-height: 50px;
+            text-align: center;
+            color: white;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <script type="text/babel">
+        class Component1 extends React.Component {
+            constructor(props){
+                super(props);
+            }
+            render(){
+                return (
+                    <header style={{
+                        backgroundColor: this.props.color
+                    }}>{this.props.name}</header>
+                )
+            }
+            componentDidMount(){
+                let sum = this.props.plus(9,8)
+                console.log(sum)
+            }
+        }
+        class Component2 extends React.Component {
+            constructor(props){
+                super(props);
+            }
+            render(){
+                return (
+                    <header style={{
+                        backgroundColor: this.props.color
+                    }}>{this.props.name}</header>
+                )
+            }
+        }
+        // HOC加工了Component1组件，往它的props新增了本该不属于它的东西
+        // 套了一层外套
+        // 插槽
+        // 你想全局加工某类组件的时候你可以使用它，组件可以再高阶组件身上获取一些本该属于自己的方法
+
+        const HOC = (props)=>{
+            return (Component)=>{
+                console.log(props,Component)
+                return ()=>{
+                    
+                    return (
+                        <div style={{
+                            fontSize: '88px'
+                        }}>    
+                            <Component  {...props} ajax={()=>{}} plus={(a,b)=>a+b} />
+                        </div>
+                    )
+                }
+            }
+        }
+
+        let Component1HOC = HOC({name:1,skill:['ps','js','css']})(Component1)
+        let Component2HOC = HOC({name:2,skill:['ps','js','css']})(Component2)
+
+        console.log(Component1HOC)
+        
+        ReactDOM.render(
+            <div>
+                <Component1HOC/>
+                <Component2HOC/>
+            </div>,
+            document.querySelector('#demo')
+        )
+    </script>
+</body>
+
+</html>

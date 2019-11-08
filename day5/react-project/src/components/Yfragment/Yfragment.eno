@@ -1,0 +1,19 @@
+<template name="Yfragment">
+    <>
+        <p ref="p1">123</p>
+        <p>456</p>
+    </>
+</template>
+<script>
+    import React from 'react';
+    export default class {
+        componentDidMount(){
+            console.log(this)
+            this.refs.p1.style.color = 'red'
+            console.log('a')
+        }
+        componentDidCatch(error, info) {
+            console.log(error, info)
+        }
+    }
+</script>

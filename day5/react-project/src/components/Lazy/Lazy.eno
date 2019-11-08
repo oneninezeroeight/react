@@ -1,0 +1,16 @@
+<template name="Lazy">
+    <div>hello world</div>
+</template>
+<script>
+    import HOC2 from '../HOC2/HOC2'
+    export default HOC2({
+        name: 'abc'
+    }, class {
+        constructor(props) {
+            super(props)
+            this.state = {
+                name: 'lin'
+            }
+        }
+    })
+</script>
