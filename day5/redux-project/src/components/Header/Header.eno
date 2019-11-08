@@ -1,0 +1,35 @@
+<template name="Header">
+    <div>hello world
+        <p>{this.props.name}</p>
+        <ul>
+            {this.props.skill.map((item,index)=><li key={index}>{item}</li>)}
+        </ul>
+        <input value={this.state.inputValue} onChange={this.setStoreName.bind(this)} />
+    </div>
+</template>
+<script>
+import { connect } from 'react-redux'
+export default connect((state)=>{
+    // 就是从仓库里面获取值
+    return state
+})(class {
+    // 让这个组件拥有dispatch的方法，我们用它来触发axction
+    constructor(props) {
+        super(props)
+        this.state = {
+            name: '123',
+            inputValue: ''
+        }
+    }
+    setStoreName(e){
+        this.setState({
+            inputValue: e.target.value 
+        })
+        this.props.dispatch({
+            type: 'SETNAME',
+            name: e.target.value
+        })
+        console.log(e.target.value)
+    }
+})
+</script>

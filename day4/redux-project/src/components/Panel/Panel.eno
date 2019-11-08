@@ -1,0 +1,45 @@
+<template name="Panel">
+    <div className="weui-panel weui-panel_access">
+        <div className="weui-panel__hd">图文组合列表{this.state.searchText}</div>
+        <div className="weui-panel__bd">
+            <News news={this.state.news} searchText={this.state.searchText} />
+        </div>
+        <div className="weui-panel__ft">
+            <a className="weui-cell weui-cell_access weui-cell_link">
+                <div className="weui-cell__bd">查看更多</div>
+                <span className="weui-cell__ft"></span>
+            </a>
+        </div>
+    </div>
+</template>
+<script>
+    import axios from 'axios'
+    import News from './News'
+    import store from '../../stores'
+    export default class {
+        constructor(props) {
+            super(props)
+            this.state = {
+                news: [],
+                searchText: ''
+            }
+        }
+        componentDidMount() {
+            this.loadMore()
+            store.subscribe(() => {
+                let state = store.getState()
+                console.log(state.searchText)
+                this.setState({
+                    searchText: state.searchText
+                })
+            })
+        }
+        async loadMore() {
+            let data = await axios.get("https://cnodejs.org/api/v1/topics")
+            console.log(data.data.data)
+            this.setState({
+                news: data.data.data
+            })
+        }
+    }
+</script>

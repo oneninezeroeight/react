@@ -1,0 +1,21 @@
+<template name="Footer">
+    <div>底部组件 {this.props.name}</div>
+</template>
+<script>
+import { connect } from 'react-redux'
+// import store from '../../stores'
+
+export default connect((state)=>{
+    // store.subscribe()
+    // store.getState()
+    return state
+})(class {
+    // store.dispatch(action)
+    constructor(props) {
+        super(props)
+        this.state = {
+            name: 'yao'
+        }
+    }
+})
+</script>
